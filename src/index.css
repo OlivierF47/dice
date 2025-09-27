@@ -1,0 +1,14 @@
+html, body {
+    height: 100vh; /* Utiliser viewport height au lieu de 100% */
+    margin: 0;
+    padding: 0;
+
+}
+
+body{
+    font-size:34px;
+    background-color:blue;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
