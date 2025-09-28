@@ -20,15 +20,15 @@ export default function DiceApp() {
     } else if (selectedValue === 20){
         maxValue = 20;
     }
-
+    for(let i = 1; i> parseInt(diceNumber.current.value); i++ ){
     const newValue = Math.floor(Math.random() * maxValue) + 1;
     setLoading(true);
-
+        
     setTimeout(() => {
       setDice(newValue);
       setLoading(false);
     }, 500);
-  };
+  };}
 
   const dclass = style[`face${dice}`];
 
@@ -42,7 +42,11 @@ export default function DiceApp() {
             <option value="10">10</option>
             <option value="20">20</option>
           </select>
-          <select></select>
+          <select ref={diceNumber}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+          </select>
           <img
             src={dicepic}
             id={style.pic}
