@@ -1,23 +1,243 @@
+/* Styles globaux et variables CSS */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --neon-blue: #00f5ff;
+  --neon-pink: #ff006e;
+  --neon-green: #00ff41;
+  --dark-bg: #0a0a23;
+  --card-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Animation de fond animé */
+@keyframes backgroundFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+  background-size: 400% 400%;
+  animation: backgroundFlow 15s ease infinite;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
 .title {
-    position: absolute;
-    top: 30%;
+    position: relative;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
-    text-shadow: 2px 2px 4px black;
-    margin: 0;
-    z-index: 5;
-    font-size: 2rem;
+    color: #fff;
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 40px 0;
+    text-shadow: 
+      0 0 5px var(--neon-blue),
+      0 0 10px var(--neon-blue),
+      0 0 20px var(--neon-blue),
+      0 0 40px var(--neon-blue);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+  to { text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink); }
 }
 
 .diceContainer{
-    width: 300px;
-    height: 300px;
-    background-color: red;
+    width: 100%;
+    max-width: 900px;
+    margin: 100px auto 50px;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.diceContainer::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--primary-gradient);
+    border-radius: 25px;
+    z-index: -1;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.controls {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.controls label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.controls select {
+    padding: 12px 16px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background: var(--secondary-gradient);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.controls select:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 6px 20px rgba(0, 0, 0, 0.3),
+      0 0 20px var(--neon-blue);
+}
+
+.controls select:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.diceGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+    width: 100%;
+    justify-items: center;
+}
+
+.singleDice {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+
+
+.diceImage {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    transition: all 0.3s ease;
+}
+
+.diceImage:hover {
+    filter: drop-shadow(0 0 20px var(--neon-blue));
+}
+
+.summary {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.total {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    padding: 20px 30px;
+    background: var(--primary-gradient);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.3),
+      0 0 20px var(--neon-pink);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    
+}
+
+
+
+.rollButton {
+    padding: 18px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    background: var(--secondary-gradient);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.3),
+      0 0 20px var(--neon-blue);
+}
+
+.rollButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.rollButton:hover::before {
+    left: 100%;
+}
+
+.rollButton:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+      0 12px 30px rgba(0, 0, 0, 0.4),
+      0 0 30px var(--neon-pink);
+}
+
+.rollButton:active {
+    transform: translateY(-1px) scale(1.02);
 }
 
 
@@ -36,21 +256,73 @@
     transform: translate(-50%, -50%);
     font-size: 3rem;
     font-weight: bold;
-    color: grey;
-    text-shadow: 2px 2px 4px white;
+    color: #fff;
+    text-shadow: 
+      0 0 5px var(--neon-blue),
+      0 0 10px var(--neon-blue),
+      2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 10;
+    pointer-events: none;
 }
 
 @keyframes roll{
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    75% { transform: rotate(270deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
 }
 
-#pic.loading {
+#pic.loading,
+.diceImage.loading {
     animation: roll 0.5s ease-in-out;
+    filter: drop-shadow(0 0 30px var(--neon-pink)) brightness(1.3);
+}
+
+/* Responsive design pour mobile */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .diceContainer {
+        margin: 60px auto 30px;
+        padding: 20px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .diceGrid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 20px;
+    }
+    
+    .singleDice {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .diceImage {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .diceNumber {
+        font-size: 2.5rem;
+    }
+    
+    .total {
+        font-size: 1.5rem;
+        padding: 15px 20px;
+    }
+    
+    .rollButton {
+        padding: 15px 30px;
+        font-size: 18px;
+    }
 }
 
